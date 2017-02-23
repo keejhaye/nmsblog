@@ -35,4 +35,15 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+
+    'google' => [ 
+    'client_id' => '346185406781-4g9r3f1t3f0oa1ucas1fg071euslmojj.apps.googleusercontent.com',
+    'client_secret' => '1a5QjWeDYhp9xpbDnH6jxomj',
+    'redirect' => 'http://localhost/nmsblog/public/auth/google/callback',
+    ],
+
+
+
+
+
 ];

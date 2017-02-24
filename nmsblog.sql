@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2017 at 04:34 AM
+-- Generation Time: Feb 24, 2017 at 04:38 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -72,9 +72,18 @@ CREATE TABLE `posts` (
   `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `body`, `user_id`, `category`, `created_at`, `updated_at`) VALUES
+(33, 'My First Blog', 'Lorem ipsum dolor sit amet, in percipit ponderum has, id vel vivendo eleifend repudiandae. Malorum saperet vel ad, cu nobis causae suavitate nam, in senserit necessitatibus nec. An per eirmod labores, pro accusam mandamus indoctum te. Iudico feugiat reformidans ne eam, vim augue dicant nonumy at. Eius ponderum ne eos. Mel id ridens labores. Ut accumsan delicatissimi usu.', 1, 'Fashion', '2017-02-24 07:37:09', '2017-02-24 07:37:09'),
+(34, 'My Second Blog', 'Lorem ipsum dolor sit amet, in percipit ponderum has, id vel vivendo eleifend repudiandae. Malorum saperet vel ad, cu nobis causae suavitate nam, in senserit necessitatibus nec. An per eirmod labores, pro accusam mandamus indoctum te. Iudico feugiat reformidans ne eam, vim augue dicant nonumy at. Eius ponderum ne eos. Mel id ridens labores. Ut accumsan delicatissimi usu.\r\n\r\nEi sit ullum semper lobortis, in verear convenire pro. Per cu scripta gloriatur, nostro debitis omittam te pro, verterem pericula eloquentiam sed ne. Qui id omnes consectetuer, at eligendi epicurei sed. Ne mel posse necessitatibus, atomorum aliquando mei te. Quo munere atomorum ocurreret no. Pri omnes omnium minimum ut, augue timeam insolens pri at.', 1, 'News', '2017-02-24 07:38:12', '2017-02-24 07:38:12');
 
 -- --------------------------------------------------------
 
@@ -119,7 +128,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Kristoffer John Della', 'dellakristofferjohn@gmail.com', '', 'K2QHjlUEcDoUQgR9pgfHPmd5LcjNm8uZNh0SyAPoXfe5Y90Dlg16PuRhacmN', '2017-02-22 01:56:54', '2017-02-22 01:56:54'),
+(1, 'Kristoffer John Della', 'dellakristofferjohn@gmail.com', '', 'VeOGDaQNs9G1cbMzBbo1HhuJ1PCrIG5yPERa9SgX3AJQm7M7hOXt6uQ0E1hv', '2017-02-22 01:56:54', '2017-02-22 01:56:54'),
 (2, 'kris', 'kris@gmail.com', '$2y$10$fVvO6xSv4O5c3WH2d08UTeZSfJxNj0JsCZL.ZrQHEjBtM2HvOtC6G', 'ztnqbiMzCmDFVFsqZeGib1YWehiLe5YisYnsBNu1pXL2JAMOCpVwuCXPcuFo', '2017-02-22 23:43:22', '2017-02-22 23:43:22');
 
 --
@@ -171,7 +180,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `social_providers`
 --

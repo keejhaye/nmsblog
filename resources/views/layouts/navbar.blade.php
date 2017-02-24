@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>NMSBLOG</title>
 
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ URL::asset('css/nmsblog.css') }}">
-    </head>
-    <body>
          <!-- Fixed navbar -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
@@ -92,6 +79,10 @@
                                         Logout
                                     </a>
 
+                                    <a href="{{URL::to('/posts/create')}}">
+                                        Create Post
+                                    </a>
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
@@ -103,32 +94,3 @@
             </div><!--/.nav-collapse -->
           </div>
         </nav>
-
-
-        @yield('content')
-
-
-        <hr>
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 item">
-                        Copyright &copy; 2017 <b><a href="/" style="color: #fff">NMSBLOG</a></b>.
-                        All rights reserved.
-                        
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            $(document).on('click', '.dropdown-menu', function(e) {
-                if ($(this).hasClass('keep-open-on-click')) { e.stopPropagation(); }
-            });
-        </script>
-    </body>
-</html>
-
-

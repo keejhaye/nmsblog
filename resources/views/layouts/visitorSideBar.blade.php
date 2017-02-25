@@ -59,22 +59,6 @@
       </div>
     </div><!-- /.sidebar-module -->
 
-    <div class="sidebar-module">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <h4>Newsletter</h4>
-          <div class="form-group label-floating">
-            <label class="control-label" for="name">Name</label>
-            <input type="text" id="name" class="form-control input-sm">
-          </div>
-          <div class="form-group label-floating">
-            <label class="control-label" for="email">E-mail</label>
-            <input type="text" id="email" class="form-control input-sm">
-          </div>
-          <a href="#" class="btn btn-default btn-raised btn-sm btn-block">Subscribe</a>
-        </div>
-      </div>
-    </div><!-- /.sidebar-module -->
 
 
   </div><!-- /.blog-sidebar -->

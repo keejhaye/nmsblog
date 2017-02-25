@@ -68,6 +68,7 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'user_role' => 'author'
         ]);
     }
 
@@ -99,10 +100,11 @@ class RegisterController extends Controller
 
         $socialProvider = SocialProvider::where('provider_id', $socialUser->getId())->first();
         if (!$socialProvider) {
-            $user = User::firstOrCreate(
-                    ['email' => $socialUser->getEmail()],
-                    ['name' => $socialUser->getName()]
-                );
+            $user = User::firstOrCreate([
+                    'email' => $socialUser->getEmail(),
+                    'name' => $socialUser->getName(),
+                    'user_role' => 'author'
+                ]);
 
             $user->socialProviders()->create(
                     ['provider_id' => $socialUser->getId(), 'provider' => 'google'] 

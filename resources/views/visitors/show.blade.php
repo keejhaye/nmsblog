@@ -33,27 +33,61 @@
               <div class="panel-body">
                 <h2 class="blog-post-title">Comments</h2>
                 <div id="disqus_thread"></div>
-                <script>
-                /**
-                * RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                * LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
-                */
-                /*
-                var disqus_config = function () {
-                this.page.url = PAGE_URL; // Replace PAGE_URL with your page's canonical URL variable
-                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                };
-                */
-                (function() { // DON'T EDIT BELOW THIS LINE
-                var d = document, s = d.createElement('script');
+                  <ul class="list-group">
+                    
+                        @foreach($comments as $comment)
 
-                s.src = '//materialblogbootstrap.disqus.com/embed.js';
+                            <li class="list-group-item">
+                              <strong style="font-size: 15px;">{{ $comment->name }} ({{ $comment->user_role }})</strong> 
+                              <span style="color: #90949c; font-size: 13px;">{{ date("F j, Y, g:i a", strtotime($comment->created_at)) }}</span>
 
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
-                })();
-                </script>
-                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+                              <br>
+
+                                  {{ $comment->body }}
+                            </li>
+
+                        @endforeach
+
+                  </ul>
+
+
+                  <hr>
+
+                    @if (Auth::guest())
+                          <div class="card">
+                            <div class="card-block">
+                                <form method="POST" action="{{ URL::to('/posts/') . '/' . $post->id . '/comments/visitors'  }}">
+                                {{ csrf_field() }}
+                                    <div class="form-group">
+                                       <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                       <input type="text" name="name" class="form-control" placeholder="Name" required>
+                                       <textarea name="body" placeholder="Comment here." class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                      <button type="submit" class="btn btn-primary">Add Comment</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                    @else
+                          <div class="card">
+                            <div class="card-block">
+                                <form method="POST" action="{{ URL::to('/posts/') . '/' . $post->id . '/comments'  }}">
+                                {{ csrf_field() }}
+                                    <div class="form-group">
+                                       <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                       <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                       <textarea name="body" placeholder="Comment here." class="form-control"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                      <button type="submit" class="btn btn-primary">Add Comment</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                    @endif
+
+
               </div>
             </div>
           </section>

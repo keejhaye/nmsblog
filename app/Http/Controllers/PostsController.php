@@ -10,12 +10,15 @@ use View;
 class PostsController extends Controller
 {
 	public function index() {
-		$posts = Post::latest()->get();
+		$admin_model = new Post();
+		$posts = $admin_model->getAllPost();
 		return view('visitors.welcome', compact('posts'));
 	}    
 
 	public function show(Post $post) {
-		return view('visitors.show', compact('post'));
+		$admin_model = new Post();
+		$comments = $admin_model->getComments($post->id);
+		return view('visitors.show', compact('post'))->with('comments', $comments);
 	}
 
 	public function create() {

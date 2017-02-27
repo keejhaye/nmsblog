@@ -1,16 +1,50 @@
 <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
 
-    <div class="sidebar-module">
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search">
-      </div>
-    </div><!-- /.sidebar-module -->
+
+
+    @if (!Auth::guest())
+            <ul class="list-group">
+              <li class="list-group-item">
+                <h4>Hi {{Auth::user()->name}}!</h4>
+              </li>
+              <li class="list-group-item">
+                 <a href="{{URL::to('/posts/create')}}">Create Blog</a>
+              </li>
+              <li class="list-group-item">
+                <a href="{{URL::to('/blogs/' . Auth::user()->id)}}">View Blog</a> 
+              </li>
+              <li class="list-group-item">
+                <a href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                    Logout
+                </a>
+              </li>
+            </ul>    
+
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  {{ csrf_field() }}
+              </form>     
+    @else 
+
+            <ul class="list-group">
+              <li class="list-group-item">
+                    <h4>Want to post a blog?</h4>
+
+                    Login via
+                    <div class="social-buttons" >
+                        <a href="{{ url('/auth/google') }}" class="btn btn-primary social-login-btn social-google" style="width: 100%;"><i class="fa fa-google-plus"> Google</i></a>
+                    </div>
+              </li>
+            </ul>  
+
+    @endif
 
     <div class="sidebar-module">
       <div class="panel panel-default">
         <div class="panel-body">
           <h4>About</h4>
-          <p>Lorem ipsum dolor sit amet, in percipit ponderum has, id vel vivendo eleifend repudiandae. Malorum saperet vel ad, cu nobis causae suavitate nam, in senserit necessitatibus nec. An per eirmod labores, pro accusam mandamus indoctum te. Iudico feugiat reformidans ne eam, vim augue dicant nonumy at. Eius ponderum ne eos. Mel id ridens labores. Ut accumsan delicatissimi usu.</p>
+          <p>A simple blog project.</p>
         </div>
       </div>
     </div><!-- /.sidebar-module -->
@@ -21,23 +55,31 @@
           <h4>Categories</h4>
           <ol class="categories list-unstyled">
             <li>
-              <a class="label label-light label-primary" href="filter-category.html">News</a>
-              <span class="label label-light label-default pull-right">8</span>
+              <a class="label label-light label-primary" href="{{ url('/posts/category/music') }}">Music</a>
+              <span class="label label-light label-default pull-right">{{ $categCount[0]->cat }}</span>
             </li>
             <li>
-              <a class="label label-light label-warning" href="filter-category.html">Apps</a>
-              <span class="label label-light label-default pull-right">5</span>
+              <a class="label label-light label-primary" href="{{ url('/posts/category/fashion') }}">Fashion</a>
+              <span class="label label-light label-default pull-right">{{ $categCount[1]->cat }}</span>
             </li>
             <li>
-              <a class="label label-light label-info" href="filter-category.html">Branding</a>
-              <span class="label label-light label-default pull-right">9</span>
+              <a class="label label-light label-primary" href="{{ url('/posts/category/news') }}">News</a>
+              <span class="label label-light label-default pull-right">{{ $categCount[2]->cat }}</span>
+            </li>
+            <li>
+              <a class="label label-light label-primary" href="{{ url('/posts/category/apps') }}">Apps</a>
+              <span class="label label-light label-default pull-right">{{ $categCount[3]->cat }}</span>
+            </li>
+            <li>
+              <a class="label label-light label-primary" href="{{ url('/posts/category/brand') }}">Brand</a>
+              <span class="label label-light label-default pull-right">{{ $categCount[4]->cat }}</span>
             </li>
           </ol>
         </div>
       </div>
     </div><!-- /.sidebar-module -->
 
-    <div class="sidebar-module">
+<!--     <div class="sidebar-module">
       <div class="panel panel-default">
         <div class="panel-body">
           <h4>Archives</h4>
@@ -57,7 +99,8 @@
           </ol>
         </div>
       </div>
-    </div><!-- /.sidebar-module -->
+    </div> -->
+    <!-- /.sidebar-module -->
 
 
 

@@ -36,12 +36,12 @@
             </div>
           </div>
 
-          <nav>
+          <!-- <nav>
             <ul class="pager">
               <li><a class="withripple" href="#">Previous</a></li>
               <li><a class="withripple" href="#">Next</a></li>
             </ul>
-          </nav>
+          </nav> -->
 
         </div><!-- /.blog-main -->
 

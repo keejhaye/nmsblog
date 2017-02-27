@@ -12,11 +12,11 @@
                     <a class="navbar-brand" href="{{ url('/') }}">NMSBLOG</a>
                 </div>
             <div id="navbar" class="navbar-collapse collapse">
+
                 <ul class="nav navbar-nav navbar-right">
                    <!-- Authentication Links -->
                     @if (Auth::guest())
-                        <li class="dropdown" style="display: none;">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                        <li class="dropdown">
                             <ul id="login-dp" class="dropdown-menu keep-open-on-click">
                                 <li>
                                      <div class="row">
@@ -65,7 +65,7 @@
                             </ul>
                         </li>
                    @else
-                   <!--      <li class="dropdown">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
@@ -78,16 +78,13 @@
                                         Logout
                                     </a>
 
-                                    <a href="{{URL::to('/posts/create')}}">
-                                        Create Post
-                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
                             </ul>
-                        </li> -->
+                        </li>
                     @endif
                 </ul>
             </div><!--/.nav-collapse -->

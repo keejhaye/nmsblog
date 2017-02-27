@@ -24,7 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
-        return view('visitors.welcome', compact('posts'));
+        $posts = Post::getAllPosts();
+        $categCount = Post::getCategCount();
+        return view('visitors.welcome', compact('posts'))->with('categCount', $categCount);
     }
 }

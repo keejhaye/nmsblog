@@ -11,10 +11,19 @@
 |
 */
 
+
+Route::get('/blogs/{userId}', 'PostsController@viewBlogs');
+
 Route::get('/', 'PostsController@index');
 Route::get('/posts/create', 'PostsController@create');
 Route::post('/posts', 'PostsController@store');
 Route::get('/posts/{post}', 'PostsController@show');
+Route::get('/posts/category/{categ}', 'PostsController@showCateg');
+
+Route::post('/blogs', 'PostsController@updateBlog');
+Route::get('/posts/update/{blogId}', 'PostsController@viewUpdate');
+Route::post('/blogspublish', 'PostsController@updatePublishBlog');
+
 
 Route::post('/posts/{post}/comments', 'CommentsController@store');
 Route::post('/posts/{post}/comments/visitors', 'CommentsController@storeVisitor');
@@ -23,6 +32,10 @@ Route::post('/posts/{post}/comments/visitors', 'CommentsController@storeVisitor'
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
+Route::post('/login/admin', [
+		'uses' => 'AdminController@authenticate',
+		'as'   => 'login.admin'
+	]);
 
 Route::get('auth/google', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\RegisterController@handleProviderCallback');

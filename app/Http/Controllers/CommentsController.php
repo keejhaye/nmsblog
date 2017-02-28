@@ -15,11 +15,11 @@ class CommentsController extends Controller
 				'body' 	=> 'required'
 			]);
 
-    	Comment::create([
-    			'body' => request('body'),
-    			'post_id' => request('post_id'),
-    			'user_id' => request('user_id')
-    		]);
+        Comment::saveAuthorComment([
+                'body' => request('body'),
+                'post_id' => request('post_id'),
+                'user_id' => request('user_id')
+            ]);
 
 		Session::flash('success', 'Comment added.');
 
@@ -34,8 +34,7 @@ class CommentsController extends Controller
             ]);
 
 
-        $commentModel = new Comment();
-        $commentModel->saveVisitorComment([
+        Comment::saveVisitorComment([
                 'body' => request('body'),
                 'post_id' => request('post_id'),
                 'name' => request('name')

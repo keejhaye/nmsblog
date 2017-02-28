@@ -9,9 +9,15 @@ class Comment extends Model
     	return $this->belongsTo(Post::class);
     }
 
-    public function saveVisitorComment($visitorComment) {
+    public static function saveVisitorComment($visitorComment) {
 
         DB::table('comments_visitors')->insert($visitorComment);
+
+    }
+
+    public static function saveAuthorComment($visitorComment) {
+
+        DB::table('comments')->insert($visitorComment);
 
     }
 }

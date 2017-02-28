@@ -38,7 +38,7 @@
                         @foreach($comments as $comment)
 
                             <li class="list-group-item">
-                              <strong style="font-size: 15px;">{{ $comment->name }} ({{ $comment->user_role }})</strong> 
+                              <strong style="font-size: 15px;">{{ $comment->name }}</strong> 
                               <span style="color: #90949c; font-size: 13px;">{{ date("F j, Y, g:i a", strtotime($comment->created_at)) }}</span>
 
                               <br>

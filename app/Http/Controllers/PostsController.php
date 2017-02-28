@@ -17,12 +17,14 @@ class PostsController extends Controller
 	}    
 
 	public function show(Post $post) {
+		$categCount = Post::getCategCount();
 		$comments = Post::getComments($post->id);
-		return view('visitors.show', compact('post'))->with('comments', $comments);
+		return view('visitors.show', compact('post'))->with('comments', $comments)->with('categCount', $categCount);
 	}
 
 	public function create() {
-		return view('visitors.create');
+		$categCount = Post::getCategCount();
+		return view('visitors.create')->with('categCount', $categCount);
 	}
 
 	public function store() {
@@ -73,16 +75,18 @@ class PostsController extends Controller
 
 	public function viewBlogs($userId) {
 
+		$categCount = Post::getCategCount();
 		$blogLists = Post::getUserPost($userId);
-		return view('blogs')->with('blogLists', $blogLists);
+		return view('blogs')->with('blogLists', $blogLists)->with('categCount', $categCount);
 
 	}
 
 
 	public function viewUpdate($blogId) {
 
+		$categCount = Post::getCategCount();
 		$blogById = Post::getBlogById($blogId);
-		return view('visitors.update')->with('blogById', $blogById);
+		return view('visitors.update')->with('blogById', $blogById)->with('categCount', $categCount);
 	}
 
 	public function updateBlog() {

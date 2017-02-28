@@ -37,5 +37,10 @@ Route::post('/login/admin', [
 		'as'   => 'login.admin'
 	]);
 
+Route::get('/login/admin/author', 'AdminController@showAuthor');
+Route::get('/login/admin/blog', 'AdminController@showBlog');
+Route::post('/userenable', 'AdminController@updateUser');
+Route::post('/adminpublish', 'AdminController@updateBlog');
+
 Route::get('auth/google', 'Auth\RegisterController@redirectToProvider');
 Route::get('auth/google/callback', 'Auth\RegisterController@handleProviderCallback');

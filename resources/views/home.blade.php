@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="row" style="margin-top: 70px;">
+    <div class="row" style="margin-top: 80px;">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>

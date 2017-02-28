@@ -110,11 +110,22 @@ class RegisterController extends Controller
                     ['provider_id' => $socialUser->getId(), 'provider' => 'google'] 
                 );
 
-
-        }else {
-            $user = $socialProvider->user;
+            $sProvider = SocialProvider::where('provider_id', $socialUser->getId())->first();
+            $user = $sProvider->user;
+            $loginIfEnabled = json_decode($user);
             auth()->login($user);
             return redirect('/home');
+
+        }else {
+
+            $user = $socialProvider->user;
+            $loginIfEnabled = json_decode($user);
+            if ($loginIfEnabled->is_enabled == 0) {
+                return "User is currently disabled.";
+            }else {
+                auth()->login($user);
+                return redirect('/home');
+            }
 
         }
     }

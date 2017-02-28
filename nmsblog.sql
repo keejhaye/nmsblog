@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 24, 2017 at 04:38 PM
+-- Generation Time: Feb 28, 2017 at 02:29 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -19,6 +19,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `nmsblog`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `body`, `post_id`, `user_id`, `created_at`, `updated_at`) VALUES
+(2, 'This is my second blog. Hope ya\'ll like it.', 41, 16, '2017-02-27 22:28:58', '2017-02-27 22:28:58');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments_visitors`
+--
+
+CREATE TABLE `comments_visitors` (
+  `id` int(11) NOT NULL,
+  `body` text NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `name` varchar(255) NOT NULL,
+  `user_role` varchar(255) NOT NULL DEFAULT 'visitor'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -40,7 +79,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '2014_10_12_000000_create_users_table', 1),
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (3, '2017_02_22_082152_create_social_providers_table', 1),
-(4, '2017_02_22_150030_create_posts_table', 2);
+(4, '2017_02_22_150030_create_posts_table', 2),
+(5, '2017_02_25_044701_create_comments_table', 3),
+(6, '2017_02_26_115402_create_admins_table', 4);
 
 -- --------------------------------------------------------
 
@@ -73,6 +114,7 @@ CREATE TABLE `posts` (
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int(11) NOT NULL,
   `category` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_publish` int(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -81,9 +123,9 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `title`, `body`, `user_id`, `category`, `created_at`, `updated_at`) VALUES
-(33, 'My First Blog', 'Lorem ipsum dolor sit amet, in percipit ponderum has, id vel vivendo eleifend repudiandae. Malorum saperet vel ad, cu nobis causae suavitate nam, in senserit necessitatibus nec. An per eirmod labores, pro accusam mandamus indoctum te. Iudico feugiat reformidans ne eam, vim augue dicant nonumy at. Eius ponderum ne eos. Mel id ridens labores. Ut accumsan delicatissimi usu.', 1, 'Fashion', '2017-02-24 07:37:09', '2017-02-24 07:37:09'),
-(34, 'My Second Blog', 'Lorem ipsum dolor sit amet, in percipit ponderum has, id vel vivendo eleifend repudiandae. Malorum saperet vel ad, cu nobis causae suavitate nam, in senserit necessitatibus nec. An per eirmod labores, pro accusam mandamus indoctum te. Iudico feugiat reformidans ne eam, vim augue dicant nonumy at. Eius ponderum ne eos. Mel id ridens labores. Ut accumsan delicatissimi usu.\r\n\r\nEi sit ullum semper lobortis, in verear convenire pro. Per cu scripta gloriatur, nostro debitis omittam te pro, verterem pericula eloquentiam sed ne. Qui id omnes consectetuer, at eligendi epicurei sed. Ne mel posse necessitatibus, atomorum aliquando mei te. Quo munere atomorum ocurreret no. Pri omnes omnium minimum ut, augue timeam insolens pri at.', 1, 'News', '2017-02-24 07:38:12', '2017-02-24 07:38:12');
+INSERT INTO `posts` (`id`, `title`, `body`, `user_id`, `category`, `is_publish`, `created_at`, `updated_at`) VALUES
+(40, 'My First Blog', 'Lorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et vi', 16, 'Music', 1, '2017-02-27 22:28:14', '2017-02-27 22:28:14'),
+(41, 'My Second Blog', 'Lorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et viLorem ipsum dolor sit amet, choro quaestio delicatissimi eum ut. Ex aliquip oblique mediocrem vim. Sonet electram per id. Ex docendi partiendo eam. Ad mel accusam copiosae, in eum congue maiorum ponderum, quidam viderer facilisi sed ei. Mentitum cotidieque an sea, dico dissentiunt et vi', 16, 'Fashion', 1, '2017-02-27 22:28:27', '2017-02-27 22:28:27');
 
 -- --------------------------------------------------------
 
@@ -105,7 +147,7 @@ CREATE TABLE `social_providers` (
 --
 
 INSERT INTO `social_providers` (`id`, `user_id`, `provider_id`, `provider`, `created_at`, `updated_at`) VALUES
-(1, 1, '113470914205787263881', 'google', '2017-02-22 01:56:54', '2017-02-22 01:56:54');
+(9, 16, '113470914205787263881', 'google', '2017-02-27 22:27:42', '2017-02-27 22:27:42');
 
 -- --------------------------------------------------------
 
@@ -119,6 +161,8 @@ CREATE TABLE `users` (
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_role` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `is_enabled` int(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -127,13 +171,25 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Kristoffer John Della', 'dellakristofferjohn@gmail.com', '', 'VeOGDaQNs9G1cbMzBbo1HhuJ1PCrIG5yPERa9SgX3AJQm7M7hOXt6uQ0E1hv', '2017-02-22 01:56:54', '2017-02-22 01:56:54'),
-(2, 'kris', 'kris@gmail.com', '$2y$10$fVvO6xSv4O5c3WH2d08UTeZSfJxNj0JsCZL.ZrQHEjBtM2HvOtC6G', 'ztnqbiMzCmDFVFsqZeGib1YWehiLe5YisYnsBNu1pXL2JAMOCpVwuCXPcuFo', '2017-02-22 23:43:22', '2017-02-22 23:43:22');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `user_role`, `is_enabled`, `created_at`, `updated_at`) VALUES
+(15, 'admin', 'admin@nmsblog.com', '$2y$10$m2T5pTS1UCgCFOC0CTJr6u5gNwOtvjxIhBnH4Ne2DUFEyHnVpZztm', 'TmjlU4xCX5ywUeSejEzK0C5282PtbF4hCDBZ0pMKYYxgSc99TsKMMYhoSzP9', 'admin', 1, '2017-02-27 22:24:46', '2017-02-27 22:24:46'),
+(16, 'Kristoffer John Della', 'dellakristofferjohn@gmail.com', '', 'fZG76P937FC77kj1Fb6m3oJY8RBDqgFYAUUatPwxfOkqnPOYSFt2hMFtVuQc', 'author', 1, '2017-02-27 22:27:42', '2017-02-27 22:27:42');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments_visitors`
+--
+ALTER TABLE `comments_visitors`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -172,25 +228,35 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `comments_visitors`
+--
+ALTER TABLE `comments_visitors`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `social_providers`
 --
 ALTER TABLE `social_providers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

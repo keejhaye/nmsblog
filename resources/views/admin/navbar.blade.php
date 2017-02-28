@@ -13,7 +13,7 @@
                 </div>
             <div id="navbar" class="navbar-collapse collapse">
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="nav navbar-nav navbar-right" style="display: none;">
                    <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li class="dropdown">
